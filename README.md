@@ -32,7 +32,7 @@ buildscript {
     }
     dependencies {
         // 其他...
-        classpath 'com.github.houjinyun:android-comm-config-plugin:V1.0.0'
+        classpath 'com.github.houjinyun:android-comm-config-plugin:V1.0.1'
     }
 }
 ```
