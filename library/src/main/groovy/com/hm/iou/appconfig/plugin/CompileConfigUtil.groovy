@@ -1,5 +1,6 @@
 package com.hm.iou.appconfig.plugin
 
+import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.dsl.LintOptions
 import org.gradle.api.GradleException
 import org.gradle.api.Project
@@ -58,14 +59,17 @@ class CompileConfigUtil {
             lintOptions.abortOnError = true
 
             //将 implementation 里的依赖全部在 api 里加进去
-            Configuration apiConf = project.configurations.getByName("api")
-            apiConf.setCanBeResolved(true)
-            for (Dependency dependency : dependencyMap.values()) {
-                if (dependency instanceof ExternalModuleDependency) {
-                    apiConf.dependencies.add(dependency.copy())
+            if (android instanceof LibraryExtension) {
+                Configuration apiConf = project.configurations.getByName("api")
+                apiConf.setCanBeResolved(true)
+                for (Dependency dependency : dependencyMap.values()) {
+                    if (dependency instanceof ExternalModuleDependency) {
+                        apiConf.dependencies.add(dependency.copy())
+                    }
                 }
+                apiConf.resolve()
             }
-            apiConf.resolve()
+
 
             /*
             List dependencyList = new ArrayList()
