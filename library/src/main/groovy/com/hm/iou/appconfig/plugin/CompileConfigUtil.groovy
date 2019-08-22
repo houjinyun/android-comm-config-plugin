@@ -67,10 +67,13 @@ class CompileConfigUtil {
             }
             apiConf.resolve()
 
+            /*
             List dependencyList = new ArrayList()
             apiConf.incoming.resolutionResult.root.dependencies.each { DependencyResult dr ->
                 collectDependencyInfo(dr, null, dependencyList)
             }
+            */
+
             //TODO 检查第三方库，防止第三方库的滥用，如果出现这种情况直接终止
             /*
             dependencyList.each { DependencyInfo dependencyInfo ->
