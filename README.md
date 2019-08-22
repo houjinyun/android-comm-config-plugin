@@ -19,3 +19,27 @@
 5. 打包时移除 META-INF/** 文件，例如：META-INF/*.kotlin_module；
 6. 强制将 implementation 形式的依赖，改为 api 形式的依赖；
 7. 增加 git hooks，规范 commit 提交信息
+
+#### 3. 使用方式
+
+在根目录 build.gradle 中增加以下配置：
+
+```
+buildscript {
+    repositories {
+        maven { url 'https://jitpack.io' }
+        // 其他...
+    }
+    dependencies {
+        // 其他...
+        classpath 'com.github.houjinyun:android-comm-config-plugin:V1.0.0'
+    }
+}
+```
+
+使用插件：
+
+```
+apply plugin: 'com.hm.plugin.commconfig'
+```
+
