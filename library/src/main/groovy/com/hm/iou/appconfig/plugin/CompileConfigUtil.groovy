@@ -7,8 +7,10 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
+import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.result.DependencyResult
 import org.gradle.api.artifacts.result.ResolvedDependencyResult
+import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 
 /**
  * 编译配置
@@ -58,32 +60,36 @@ class CompileConfigUtil {
             LintOptions lintOptions = android.getLintOptions()
             lintOptions.abortOnError = true
 
-            //将 implementation 里的依赖全部在 api 里加进去
+            //将 library 模块 implementation 里的依赖全部在 compile 里加进去
             if (android instanceof LibraryExtension) {
-                Configuration apiConf = project.configurations.getByName("api")
-                apiConf.setCanBeResolved(true)
+                Configuration compileConf = project.configurations.getByName("compile")
+                compileConf.setCanBeResolved(true)
                 for (Dependency dependency : dependencyMap.values()) {
                     if (dependency instanceof ExternalModuleDependency) {
-                        apiConf.dependencies.add(dependency.copy())
+                        compileConf.dependencies.add(dependency.copy())
                     }
                 }
-                apiConf.resolve()
-            }
-
+                compileConf.dependencies.each { Dependency d ->
+                    if (d instanceof ProjectDependency) {
+                        throw new GradleException("请将直接工程依赖 compile project(':${d.name}') 改为 implementation project(':${d.name}')")
+                    }
+                }
+                //如果配置里有 compile project(':***') 这样的直接工程依赖，这里直接 resolve() 会报错
+                compileConf.resolve()
 
             /*
-            List dependencyList = new ArrayList()
-            apiConf.incoming.resolutionResult.root.dependencies.each { DependencyResult dr ->
-                collectDependencyInfo(dr, null, dependencyList)
-            }
-            */
+                //TODO 检查第三方库，防止第三方库的滥用，如果出现这种情况直接终止
+                List dependencyList = new ArrayList()
+                compileConf.incoming.resolutionResult.root.dependencies.each { DependencyResult dr ->
+                    collectDependencyInfo(dr, null, dependencyList)
+                }
 
-            //TODO 检查第三方库，防止第三方库的滥用，如果出现这种情况直接终止
-            /*
-            dependencyList.each { DependencyInfo dependencyInfo ->
-                println(dependencyInfo)
+                dependencyList.each { DependencyInfo dependencyInfo ->
+                    println(dependencyInfo)
+                }
+                */
+
             }
-            */
         }
     }
 
