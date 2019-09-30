@@ -71,9 +71,12 @@ class ProguardRuleCheckUtil {
             if (line.matches(~"[\\s]*-dontshrink[\\s]*")) {
                 throw new GradleException("违反 Proguard 规则：\n禁止使用 -dontshrink ")
             }
-            if (line.matches(~"[\\s]*-dontoptimize[\\s]*")) {
+
+            //该选项如果开启，编译会很慢
+            /*if (line.matches(~"[\\s]*-dontoptimize[\\s]*")) {
                 throw new GradleException("违反 Proguard 规则：\n禁止使用 -dontoptimize ")
-            }
+            }*/
+
             if (line.matches(~"[\\s]*-dontwarn[\\s]*\\*\\*[\\s]*")) {
                 throw new GradleException("违反 Proguard 规则：\n禁止使用 -dontwarn ** ")
             }
