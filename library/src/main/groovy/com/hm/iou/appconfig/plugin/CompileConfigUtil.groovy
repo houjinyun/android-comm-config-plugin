@@ -55,6 +55,7 @@ class CompileConfigUtil {
 
             //使用kotlin 之后，会在 META-INF 下面产生很多 kotlin_module 文件
             android.getPackagingOptions().exclude("META-INF/*.kotlin_module")
+            android.getPackagingOptions().exclude("META-INF/proguard/coroutines.pro")
 
             //禁止关闭 lint error 检测
             LintOptions lintOptions = android.getLintOptions()

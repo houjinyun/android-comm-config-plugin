@@ -13,7 +13,7 @@ class LibVersionUtil {
     static def SUPPORT_VERSION = "26.1.0"
     static def MULTIDEX_VERSION = "1.0.2"
     static def GSON_VERSION = "2.8.0"
-    static def KOTLIN_VERSION = "1.3.40"
+    static def KOTLIN_VERSION = "1.3.50"
 
     static void checkLibVersion(Project project) {
         ConfigurationContainer container = project.configurations
