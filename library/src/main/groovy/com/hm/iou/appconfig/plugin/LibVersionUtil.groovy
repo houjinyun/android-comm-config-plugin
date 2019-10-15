@@ -10,9 +10,9 @@ import org.gradle.api.artifacts.ResolutionStrategy
  */
 class LibVersionUtil {
 
-    static def SUPPORT_VERSION = "26.1.0"
+    static def SUPPORT_VERSION = "28.0.0"
     static def MULTIDEX_VERSION = "1.0.2"
-    static def GSON_VERSION = "2.8.0"
+    static def GSON_VERSION = "2.8.5"
     static def KOTLIN_VERSION = "1.3.50"
 
     static void checkLibVersion(Project project) {

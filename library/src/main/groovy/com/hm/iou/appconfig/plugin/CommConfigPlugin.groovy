@@ -1,17 +1,7 @@
 package com.hm.iou.appconfig.plugin
 
-import com.android.build.gradle.internal.dsl.LintOptions
-import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.Task
-import org.gradle.api.artifacts.Configuration
-import org.gradle.api.artifacts.ConfigurationContainer
-import org.gradle.api.artifacts.Dependency
-import org.gradle.api.artifacts.ExternalModuleDependency
-import org.gradle.api.artifacts.ResolutionStrategy
-import org.gradle.api.execution.TaskExecutionListener
-import org.gradle.api.tasks.TaskState
 
 /**
  * 组件通用配置插件，提供的功能有：

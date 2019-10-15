@@ -10,16 +10,15 @@ import org.gradle.api.artifacts.ExternalModuleDependency
 import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.artifacts.result.DependencyResult
 import org.gradle.api.artifacts.result.ResolvedDependencyResult
-import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 
 /**
  * 编译配置
  */
 class CompileConfigUtil {
 
-    static def MIN_SDK = 19
-    static def TARGET_SDK = 26
-    static def COMPILE_SDK = "android-26"
+    static def MIN_SDK = 21
+    static def TARGET_SDK = 28
+    static def COMPILE_SDK = "android-28"
 
     static void checkCompileConfig(Project project) {
         //如果有 aar 依赖包，定义所有的 aar 包都放在 libs 目录下
